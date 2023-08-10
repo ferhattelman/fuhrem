@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/button.css' %}">
+</head>
+<body>
+    <div class="main-container">
+        <div class="image-container">
+            {% load static %}
+            <img src="{% static 'images/logo.png' %}" alt="Führem">
+        </div>
+        <div class="center-container"> 
+            <form action="{% url 'search' %}" method="get">
+                <button type="submit">Search</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

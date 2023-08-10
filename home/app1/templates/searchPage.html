@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/header.css' %}">
+    <link rel="stylesheet" href="{% static 'css/search.css' %}">
+    <link rel="stylesheet" href="{% static 'css/wrapper.css' %}">
+    <link href="https://fonts.cdnfonts.com/css/blanka" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
+	<script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+	<script>
+		$(document).ready(function(){
+			$("#df1").click(function(){
+			  $("#dd1 ul").addClass("active");
+			});
+
+			$("#dd1 ul li").click(function(){
+			  var text = $(this).text();
+			  $("#df1").text(text);
+			  $("#dd1 ul").removeClass("active");
+			});
+		});
+
+    $(document).ready(function(){
+			$("#df2").click(function(){
+			  $("#dd2 ul").addClass("active");
+			});
+
+			$("#dd2 ul li").click(function(){
+			  var text = $(this).text();
+			  $("#df2").text(text);
+			  $("#dd2 ul").removeClass("active");
+			});
+		});
+
+    $(document).ready(function(){
+			$("#df3").click(function(){
+			  $("#dd3 ul").addClass("active");
+			});
+
+			$("#dd3 ul li").click(function(){
+			  var text = $(this).text();
+			  $("#df3").text(text);
+			  $("#dd3 ul").removeClass("active");
+			});
+		});
+
+	</script>
+<body>
+    {% load static %}
+    <h1>FUHREM</h1>
+    <ul class="menu-bar">
+        <li><a class="menu-link" href="{% url 'search' %}">Home</a></li>
+        <li><a class="menu-link" href="{% url 'about' %}">About</a></li>
+        <li><a class="menu-link" href="{% url 'contact' %}">Contact</a></li>
+    </ul>
+    <div class="wrapper">
+        <div class="search_box">
+            <div id="dd1" class="dropdown">
+                <div id="df1" class="default_option">Category</div>  
+                <ul>
+                  <li>Photos</li>
+                  <li>Vector</li>
+                  <li>Illustrations</li>
+                  <li>Video</li>
+                  <li>Editorial Image</li>
+                  <li>Editorial Video</li>
+                </ul>
+            </div>
+
+            <div class="search_field">
+              <input type="text" class="input" placeholder="Search">
+              <i class="fas fa-search"></i>
+            </div>
+
+            <div id="dd2" class="dropdown">
+                <div id="df2" class="default_option">Value</div>  
+                <ul>
+                  <li>10</li>
+                  <li>25</li>
+                  <li>50</li>
+                  <li>100</li>
+                  <li>250</li>
+                  <li>500</li>
+                  <li>1000</li>
+                </ul>
+            </div>
+            <div id="dd3" class="dropdown">
+                <div id="df3" class="default_option">Regression</div>  
+                <ul>
+                  <li>Linner</li>
+                  <li>Logistics</li>
+                </ul>
+            </div>
+            
+            
+        </div>
+    </div>
+</body>
+</html>

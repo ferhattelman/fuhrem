@@ -1,0 +1,32 @@
+body{
+    background-color: #060606;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+.image-container {
+    text-align: center;
+}
+.image-container img {
+    max-width: 100%;
+    max-height: 100%;
+}
+/* Eğer gerekirse .main-container div'ine stil ekleyin */
+.main-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  /* Eğer gerekirse .image-container div'ine stil ekleyin */
+  .image-container {
+    /* Burada gerekli stil düzenlemelerini yapın */
+  }
+  
+  /* Eğer gerekirse .container div'ine stil ekleyin */
+  .container {
+    /* Burada gerekli stil düzenlemelerini yapın */
+  }
+  

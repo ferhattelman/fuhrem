@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/header.css' %}">
+    <link rel="stylesheet" href="{% static 'css/search.css' %}">
+    <link href="https://fonts.cdnfonts.com/css/blanka" rel="stylesheet">
+              
+    
+</head>
+<body>
+    {% load static %}
+    <h1>FUHREM</h1>
+    <ul class="menu-bar">
+        <li><a class="menu-link" href="{% url 'search' %}">Home</a></li>
+        <li><a class="menu-link" href="{% url 'about' %}">About</a></li>
+        <li><a class="menu-link" href="{% url 'contact' %}">Contact</a></li>
+    </ul>
+</body>
+</html>
