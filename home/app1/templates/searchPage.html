@@ -28,10 +28,16 @@
 			  $("#dd1 ul").removeClass("active");
         option = text;
 			});
-		});
+      
+      $(document).on("click", function(event) {
+        if (!$(event.target).closest(".dropdown").length) {
+          $(".dropdown ul").removeClass("active");
+        }
+      });
+    });
 
-    $(document).ready(function(){
-			$("#df2").click(function(){
+    $(document).ready(function() {
+      $("#df2").click(function(){
 			  $("#dd2 ul").addClass("active");
 			});
 
@@ -41,10 +47,17 @@
 			  $("#dd2 ul").removeClass("active");
         number = text;
 			});
-		});
+      $(document).on("click", function(event) {
+        if (!$(event.target).closest(".dropdown").length) {
+          $(".dropdown ul").removeClass("active");
+        }
+      });
+    });
 
-    $(document).ready(function(){
-			$("#df3").click(function(){
+
+
+    $(document).ready(function() {
+      $("#df3").click(function(){
 			  $("#dd3 ul").addClass("active");
 			});
 
@@ -55,7 +68,13 @@
         graphic = text;
         
 			});
-		});
+      $(document).on("click", function(event) {
+        if (!$(event.target).closest(".dropdown").length) {
+          $(".dropdown ul").removeClass("active");
+        }
+      });
+    });
+
 	</script>
 <body>
     {% load static %}
@@ -85,8 +104,8 @@
             </div>
 
             <div id="dd2" class="dropdown">
-                <div id="df2" class="default_option">Value</div>  
-                <ul>
+                <div id="df2" class="default_option">Value</div>
+                  <ul>
                   <li>10</li>
                   <li>25</li>
                   <li>50</li>
@@ -96,8 +115,8 @@
                   <li>1000</li>
                 </ul>
             </div>
-            <div id="dd3" class="dropdown">
-                <div id="df3" class="default_option">Regression</div>  
+            <div id="dd3" class="dropdown lastop">
+                <div id="df3" class="default_option">Regression</div> 
                 <ul>
                   <li>Linner</li>
                   <li>Logistics</li>

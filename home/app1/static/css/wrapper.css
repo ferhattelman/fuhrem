@@ -16,7 +16,7 @@
 }
 
 .wrapper .search_box{
-  width: 820px;
+  width: 900px;
   background: #fff;
   border-radius: 5px;
   height: 65px;
@@ -26,11 +26,15 @@
 }
 
 .wrapper .search_box .dropdown{
-  width: 150px;
+  width: 200px;
   border-right: 2px solid #dde2f1;
   color: #000000;
   position: relative;
   cursor: pointer;
+}
+
+.wrapper .search_box .lastop{
+  border-right: none;
 }
 
 .wrapper .search_box .dropdown .default_option{
@@ -74,6 +78,16 @@
   right: 20px;
   border: 8px solid;
   border-color: #5078ef transparent transparent transparent;
+}
+
+.wrapper .search_box .dropdown .btn{
+  content: "";
+  position: absolute;
+  top: 18px;
+  right: 20px;
+  border: 8px solid;
+  border-color: #5078ef transparent transparent transparent;
+  background-color: #fff;
 }
 
 .wrapper .search_box .search_field{
