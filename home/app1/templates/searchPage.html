@@ -7,8 +7,16 @@
     <link rel="stylesheet" href="{% static 'css/wrapper.css' %}">
     <link href="https://fonts.cdnfonts.com/css/blanka" rel="stylesheet">
     <script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
-	<script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+	  <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
 	<script>
+    let option;
+    let number;
+    let graphic;
+    $(document).ready(function(){
+      $("#btn").click(function(){
+        console.log(option+' '+number+' '+graphic);
+      });
+    });
 		$(document).ready(function(){
 			$("#df1").click(function(){
 			  $("#dd1 ul").addClass("active");
@@ -18,6 +26,7 @@
 			  var text = $(this).text();
 			  $("#df1").text(text);
 			  $("#dd1 ul").removeClass("active");
+        option = text;
 			});
 		});
 
@@ -30,6 +39,7 @@
 			  var text = $(this).text();
 			  $("#df2").text(text);
 			  $("#dd2 ul").removeClass("active");
+        number = text;
 			});
 		});
 
@@ -42,9 +52,10 @@
 			  var text = $(this).text();
 			  $("#df3").text(text);
 			  $("#dd3 ul").removeClass("active");
+        graphic = text;
+        
 			});
 		});
-
 	</script>
 <body>
     {% load static %}
@@ -70,7 +81,7 @@
 
             <div class="search_field">
               <input type="text" class="input" placeholder="Search">
-              <button class="fas fa-search"></button>
+              <button id="btn" class="fas fa-search"></button>
             </div>
 
             <div id="dd2" class="dropdown">
@@ -92,9 +103,8 @@
                   <li>Logistics</li>
                 </ul>
             </div>
-            
-            
         </div>
     </div>
+    <script src="/static/js/tryn.js"></script>
 </body>
 </html>
