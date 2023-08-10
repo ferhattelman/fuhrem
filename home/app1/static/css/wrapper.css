@@ -16,7 +16,7 @@
 }
 
 .wrapper .search_box{
-  width: 820px;
+  width: 900px;
   background: #fff;
   border-radius: 5px;
   height: 65px;
@@ -26,7 +26,7 @@
 }
 
 .wrapper .search_box .dropdown{
-  width: 150px;
+  width: 200px;
   border-right: 2px solid #dde2f1;
   color: #000000;
   position: relative;
@@ -39,7 +39,7 @@
   font-size: 14px;
 }
 
-.wrapper .search_box .dropdown ul{
+.wrapper .search_box .dropdown select{
   position: absolute;
   top: 70px;
   left: -10px;
@@ -51,19 +51,19 @@
   box-shadow: 8px 8px 6px -10px #b3c6ff;
 }
 
-.wrapper .search_box .dropdown ul.active{
+.wrapper .search_box .dropdown select.active{
   display: block;
 }
 
-.wrapper .search_box .dropdown ul li{
+.wrapper .search_box .dropdown select option{
   padding-bottom: 20px;
 }
 
-.wrapper .search_box .dropdown ul li:last-child{
+.wrapper .search_box .dropdown select option:last-child{
   padding-bottom: 0;
 }
 
-.wrapper .search_box .dropdown ul li:hover{
+.wrapper .search_box .dropdown select option:hover{
   color: #000000;
 }
 
@@ -74,6 +74,16 @@
   right: 20px;
   border: 8px solid;
   border-color: #5078ef transparent transparent transparent;
+}
+
+.wrapper .search_box .dropdown .btn{
+  content: "";
+  position: absolute;
+  top: 18px;
+  right: 20px;
+  border: 8px solid;
+  border-color: #5078ef transparent transparent transparent;
+  background-color: #fff;
 }
 
 .wrapper .search_box .search_field{
