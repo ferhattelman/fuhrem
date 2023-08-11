@@ -85,6 +85,8 @@
         <li><a class="menu-link" href="{% url 'contact' %}">Contact</a></li>
     </ul>
     <div class="wrapper">
+      <form method="post" action="{% url 'pw_search' %}" class="search_field">
+        {% csrf_token %}
         <div class="search_box">
             <div id="dd1" class="dropdown">
                 <div id="df1" class="default_option">Category</div>  
@@ -99,8 +101,8 @@
             </div>
 
             <div class="search_field">
-              <input type="text" class="input" placeholder="Search">
-              <button id="btn" class="fas fa-search"></button>
+                <input type="text" name="input_degeri" class="input" placeholder="Search">
+                <button id="btn" class="fas fa-search"></button>
             </div>
 
             <div id="dd2" class="dropdown">
@@ -123,6 +125,7 @@
                 </ul>
             </div>
         </div>
+      </form>
     </div>
 </body>
 </html>
