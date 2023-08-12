@@ -15,10 +15,12 @@ def ContactPage(request):
     return render(request, 'contactPage.html')
 
 def pwSearch(request):
-    try:    
-        input_degeri = request.POST.get('input_degeri')
-        veri_turu = "vector"
-        arama_sayisi = 50
+    try:   
+        if request.method == 'POST':
+            veri_turu = request.POST.get('veri_turu').lower()
+            arama_sayisi = int(request.POST.get('arama_sayisi'))
+            input_degeri = request.POST.get('input_degeri').lower()
+        
         from playwright.sync_api import sync_playwright
         from bs4 import BeautifulSoup
         import sqlite3

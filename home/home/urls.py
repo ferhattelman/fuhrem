@@ -24,5 +24,5 @@ urlpatterns = [
     path('search/', views.SearchPage, name='search'),
     path('about/', views.AboutPage, name='about'),
     path('contact/', views.ContactPage, name='contact'),
-    path('ara/', views.pwSearch, name='pw_search')
+    path('ara/', views.pwSearch, name='pwSearch')
 ]

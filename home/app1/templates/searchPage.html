@@ -26,7 +26,7 @@
 			  var text = $(this).text();
 			  $("#df1").text(text);
 			  $("#dd1 ul").removeClass("active");
-        veri_turu = text;
+        $("#veri_turu").val(text);
 			});
       
       $(document).on("click", function(event) {
@@ -45,7 +45,7 @@
 			  var text = $(this).text();
 			  $("#df2").text(text);
 			  $("#dd2 ul").removeClass("active");
-        arama_sayisi = text;
+        $("#arama_sayisi").val(text);
 			});
       $(document).on("click", function(event) {
         if (!$(event.target).closest(".dropdown").length) {
@@ -85,24 +85,27 @@
         <li><a class="menu-link" href="{% url 'contact' %}">Contact</a></li>
     </ul>
     <div class="wrapper">
-      <form method="post" action="{% url 'pw_search' %}" class="search_field">
+      <form method="post" action="{% url 'pwSearch' %}" class="search_field">
         {% csrf_token %}
         <div class="search_box">
             <div id="dd1" class="dropdown">
                 <div id="df1" class="default_option">Category</div>  
                 <ul>
-                  <li>Photos</li>
+                  <li>Photo</li>
                   <li>Vector</li>
-                  <li>Illustrations</li>
+                  <li>Illustration</li>
                   <li>Video</li>
                   <li>Editorial Image</li>
                   <li>Editorial Video</li>
                 </ul>
             </div>
+            
 
             <div class="search_field">
-                <input type="text" name="input_degeri" class="input" placeholder="Search">
-                <button id="btn" class="fas fa-search"></button>
+              <input type="hidden" name="veri_turu" id="veri_turu">
+              <input type="hidden" name="arama_sayisi" id="arama_sayisi">
+              <input type="text" name="input_degeri" class="input" placeholder="Search">
+              <button id="btn" class="fas fa-search"></button>
             </div>
 
             <div id="dd2" class="dropdown">
