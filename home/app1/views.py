@@ -14,6 +14,9 @@ def AboutPage(request):
 def ContactPage(request):
     return render(request, 'contactPage.html')
 
+def ResultPage(request):
+    return render(request, 'resultPage.html')
+
 def pwSearch(request):
     try:   
         if request.method == 'POST':
