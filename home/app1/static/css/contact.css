@@ -1,6 +1,4 @@
 *{
-    padding: 0;
-    margin: 0;
     box-sizing: border-box;
 }
 
@@ -9,6 +7,8 @@
     padding: 140px 0;
     align-items: center;
     text-align: center;
+    width: auto;
+    height: auto;
 }
 
 .about img{
