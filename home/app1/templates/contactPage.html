@@ -2,18 +2,82 @@
 <html>
 <head>
     {% load static %}
-    <link rel="stylesheet" href="{% static 'css/header.css' %}">
+    <link rel="stylesheet" href="{% static 'css/contact.css' %}">
     <link rel="stylesheet" href="{% static 'css/search.css' %}">
+    <link rel="stylesheet" href="{% static 'css/header.css' %}">
     <link rel="stylesheet" href="{% static 'css/wrapper.css' %}">
     <link href="https://fonts.cdnfonts.com/css/blanka" rel="stylesheet">
 </head>
 <body>
     {% load static %}
-    <h1>FUHREM</h1>
+    <h1 class="h1">FUHREM</h1>
     <ul class="menu-bar">
         <li><a class="menu-link" href="{% url 'search' %}">Home</a></li>
         <li><a class="menu-link" href="{% url 'about' %}">About</a></li>
         <li><a class="menu-link" href="{% url 'contact' %}">Contact</a></li>
     </ul>
+    
+    
+    <section class="about">
+        <div class="slides">
+            <img src="{% static 'images/ferhat.jpg' %}">
+            <div class="about-text">
+                <h1>Ferhat Telman</h1>
+                <h4><span>Jr. Frontend Developer</span> </h4>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia saepe atque, explicabo doloremque perspiciatis labore fugit aperiam numquam molestiae exercitationem?</p>
+                <button>X</button>
+            </div>
+        </div>
+        <div class="slides">
+            <img src="{% static 'images/ferhat.jpg' %}">
+            <div class="about-text">
+                <h1>Umit Cifci</h1>
+                <h4><span>Jr. Frontend Developer</span> </h4>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia saepe atque, explicabo doloremque perspiciatis labore fugit aperiam numquam molestiae exercitationem?</p>
+                <button>X</button>
+            </div>
+        </div>
+        <div class="slides">
+            <img src="{% static 'images/ferhat.jpg' %}">
+            <div class="about-text">
+                <h1>Helin Aktas</h1>
+                <h4><span>Jr. Frontend Developer</span> </h4>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia saepe atque, explicabo doloremque perspiciatis labore fugit aperiam numquam molestiae exercitationem?</p>
+                <button>X</button>
+            </div>
+        </div>
+
+        <div class="slides">
+            <img src="{% static 'images/ferhat.jpg' %}">
+            <div class="about-text">
+                <h1>Ronay Oktem</h1>
+                <h4><span>Jr. Frontend Developer</span> </h4>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia saepe atque, explicabo doloremque perspiciatis labore fugit aperiam numquam molestiae exercitationem?</p>
+                <button>X</button>
+            </div>
+        </div>
+
+        <div class="slides">
+            <img src="{% static 'images/eren.jpg' %}">
+            <div class="about-text">
+                <h1>Eren Igit</h1>
+                <h4><span>Jr. Test Engineer</span> </h4>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia saepe atque, explicabo doloremque perspiciatis labore fugit aperiam numquam molestiae exercitationem?</p>
+                <button>X</button>
+            </div>
+        </div>
+        <div class="slides">
+            <img src="{% static 'images/ferhat.jpg' %}">
+            <div class="about-text">
+                <h1>Merva Dogan</h1>
+                <h4><span>Jr. Frontend Developer</span> </h4>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia saepe atque, explicabo doloremque perspiciatis labore fugit aperiam numquam molestiae exercitationem?</p>
+                <button>X</button>
+            </div>
+        </div>
+        
+    </section>
+
+
 </body>
 </html>

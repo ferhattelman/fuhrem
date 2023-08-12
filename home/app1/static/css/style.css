@@ -2,8 +2,9 @@ body{
     background-color: #060606;
     display: flex;
     justify-content: center;
-    align-items: center;
-    height: 100vh;
+    /* align-items: center; */
+    height: auto;
+    width: auto;
     margin: 0;
 }
 .image-container {

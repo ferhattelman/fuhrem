@@ -1,12 +1,11 @@
 body {
-    /* background: url("https://hdqwalls.com/download/stranger-things-season-3-2019-4k-5k-38-1920x1080.jpg") center / cover no-repeat; */
 	background-color: #000;
     height: 100vh;
     margin: 0;
-    display: flex;
+    /* display: flex; */
     justify-content: center;
 }
-h1 {
+h1.h1 {
     font-family: "Blanka", sans-serif;
     color: #fff;
     position: absolute;
