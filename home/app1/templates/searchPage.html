@@ -9,12 +9,12 @@
     <script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
 	  <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
 	<script>
-    let option;
-    let number;
+    let veri_turu;
+    let arama_sayisi;
     let graphic;
     $(document).ready(function(){
       $("#btn").click(function(){
-        console.log(option+' '+number+' '+graphic);
+        console.log(veri_turu+' '+arama_sayisi+' '+graphic);
       });
     });
 		$(document).ready(function(){
@@ -26,7 +26,7 @@
 			  var text = $(this).text();
 			  $("#df1").text(text);
 			  $("#dd1 ul").removeClass("active");
-        option = text;
+        veri_turu = text;
 			});
       
       $(document).on("click", function(event) {
@@ -45,7 +45,7 @@
 			  var text = $(this).text();
 			  $("#df2").text(text);
 			  $("#dd2 ul").removeClass("active");
-        number = text;
+        arama_sayisi = text;
 			});
       $(document).on("click", function(event) {
         if (!$(event.target).closest(".dropdown").length) {
