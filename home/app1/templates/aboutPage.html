@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="{% static 'css/header.css' %}">
     <link rel="stylesheet" href="{% static 'css/search.css' %}">
     <link rel="stylesheet" href="{% static 'css/wrapper.css' %}">
+    <link rel="stylesheet" href="{% static 'css/contact.css' %}">
     <link href="https://fonts.cdnfonts.com/css/blanka" rel="stylesheet">
 </head>
 <body>
@@ -16,6 +17,24 @@
         <li><a class="menu-link" href="{% url 'about' %}">About</a></li>
         <li><a class="menu-link" href="{% url 'contact' %}">Contact</a></li>
     </ul>
+
+    <section class="about">
+        <div class="slides">
+            <img src="{% static 'images/logo.png' %}">
+            <div class="about-text">
+                <h1><span>FUHREM</span></h1>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia saepe atque, explicabo doloremque perspiciatis labore fugit aperiam numquam molestiae exercitationem?</p>
+                <div class="social-buttons">
+                    <a href="https://www.linkedin.com/in/ronay-%C3%B6ktem-0b9687246/" class="social-button social-button--linkedin" aria-label="LinkedIn" target="_blank">
+                      <i class="fab fa-linkedin-in"></i>
+                    </a>
+                    <a href="https://github.com/Poeron" class="social-button social-button--github" aria-label="GitHub" target="_blank">
+                      <i class="fab fa-github"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
 
 </body>
 </html>
