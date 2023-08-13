@@ -55,8 +55,7 @@ def pwSearch(request):
 
             page = context.new_page()
             i = 0
-            sayfa_sayaci = 0
-            sayfa_sayaci += 1
+            sayfa_sayaci = 1
             page.goto(url + str(sayfa_sayaci))
             page.mouse.wheel(0, 10000)
             html = page.inner_html("div.mui-1nl4cpc-gridContainer-root")
