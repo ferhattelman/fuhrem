@@ -26,5 +26,5 @@ urlpatterns = [
     path('contact/', views.ContactPage, name='contact'),
     path('result/', views.ResultPage, name='result'),
     path('ara/', views.pwSearch, name='pwSearch'),
-    path('loading', views.LoadingPage, name='loading')
+    path('loading/', views.LoadingPage, name='loading')
 ]
