@@ -31,12 +31,11 @@ def pwSearch(request):
         from bs4 import BeautifulSoup
         import sqlite3
 
-        conn = sqlite3.connect('deneme.db')
+        conn = sqlite3.connect('db.sqlite3')
         cursor = conn.cursor()
-
-        cursor.execute("DROP TABLE IF EXISTS tagler")
-        cursor.execute("CREATE TABLE tagler(tag text, title text)")
-        add_command = """INSERT INTO tagler (tag, title) VALUES (?, ?)"""
+        cursor.execute("DELETE FROM sqlite_sequence WHERE name='app1_search_data';")
+        cursor.execute("DELETE FROM app1_search_data;")
+        add_command = """INSERT INTO app1_search_data (tag, title) VALUES (?, ?);"""
 
         with sync_playwright() as p:
             browser = p.chromium.launch(headless=False)
