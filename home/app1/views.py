@@ -33,8 +33,8 @@ def pwSearch(request):
 
         conn = sqlite3.connect('db.sqlite3')
         cursor = conn.cursor()
-        cursor.execute("DELETE FROM sqlite_sequence WHERE name='app1_search_data';")
         cursor.execute("DELETE FROM app1_search_data;")
+        cursor.execute("DELETE FROM sqlite_sequence WHERE name='app1_search_data';")
         add_command = """INSERT INTO app1_search_data (tag, title) VALUES (?, ?);"""
 
         with sync_playwright() as p:
@@ -83,11 +83,11 @@ def pwSearch(request):
                         page.get_by_role("button", name="Anahtar sözcükleri panoya kopyalayın").click()
                         titles = page.inner_html(".mui-u28gw5-titleRow > h1").split(".")
                         filtered_titles = [title.strip() for title in titles if title.strip()]
-                        datas = page.evaluate("navigator.clipboard.readText()").split(',')
-                        for data, title in zip(datas, filtered_titles):
-                            cursor.execute(add_command, (data.strip(), title.strip()))
-                        for data in datas[len(filtered_titles):]:
-                            cursor.execute(add_command, (data.strip(), None))
+                        tags = page.evaluate("navigator.clipboard.readText()").split(',')
+                        for tag, title in zip(tags, filtered_titles):
+                            cursor.execute(add_command, (tag.strip(), title.strip()))
+                        for tag in tags[len(filtered_titles):]:
+                            cursor.execute(add_command, (tag.strip(), None))
                 i+=1
             browser.close()
             conn.commit()
