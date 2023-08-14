@@ -35,8 +35,8 @@ def pwSearch(request):
         cursor = conn.cursor()
 
         cursor.execute("DROP TABLE IF EXISTS tagler")
-        cursor.execute("CREATE TABLE tagler(tag text)")
-        add_command = """INSERT INTO tagler VALUES(?)"""
+        cursor.execute("CREATE TABLE tagler(tag text, title text)")
+        add_command = """INSERT INTO tagler (tag, title) VALUES (?, ?)"""
 
         with sync_playwright() as p:
             browser = p.chromium.launch(headless=False)
@@ -82,11 +82,13 @@ def pwSearch(request):
                     if durum == "En iyi seçim!":
                         arama_sayisi -= 1
                         page.get_by_role("button", name="Anahtar sözcükleri panoya kopyalayın").click()
-                        title = page.inner_html(".mui-u28gw5-titleRow > h1")
+                        titles = page.inner_html(".mui-u28gw5-titleRow > h1").split(".")
+                        filtered_titles = [title.strip() for title in titles if title.strip()]
                         datas = page.evaluate("navigator.clipboard.readText()").split(',')
-                        for data in datas:
-                            cursor.execute(add_command,(data.strip(),))
-                        print(title)
+                        for data, title in zip(datas, filtered_titles):
+                            cursor.execute(add_command, (data.strip(), title.strip()))
+                        for data in datas[len(filtered_titles):]:
+                            cursor.execute(add_command, (data.strip(), None))
                 i+=1
             browser.close()
             conn.commit()
