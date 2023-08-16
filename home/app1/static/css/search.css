@@ -38,6 +38,7 @@ h1.h1 {
     position: relative;
     cursor: pointer;
     white-space: nowrap;
+    transition: color 0.2s; /* Eklemek: Metin rengi değişimini smooth hale getirir */
 }
 
 .menu-bar li::before {
@@ -50,17 +51,16 @@ h1.h1 {
     z-index: -1;
     transition: .2s;
     border-radius: 25px;
+    transform: scale(0.8); /* Değişiklik: Başlangıçta beyaz alanı küçült */
 }
 
 .menu-bar li:hover::before {
     background: linear-gradient(to bottom, #e8edec, #d2d1d3);
     box-shadow: 0px 3px 20px 0px black;
-    transform: scale(1.2);
+    transform: scale(0.8);
+    color: black; 
 }
 
 .menu-bar li:hover {
     color: black;
 }
-
-
-

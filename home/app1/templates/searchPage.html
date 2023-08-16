@@ -83,7 +83,7 @@
     <ul class="menu-bar">
         <a style="text-decoration:none;" href="{% url 'search' %}"> <li ><p class="menu-link" >Home</p></li></a>
         <a style="text-decoration:none;" href="{% url 'about' %}"> <li ><p class="menu-link" >About</p></li></a>
-        <a  href="{% url 'contact' %}"> <li ><p class="menu-link" >Contact</p></li></a>
+        <a style="text-decoration:none;" href="{% url 'contact' %}"> <li ><p class="menu-link" >Contact</p></li></a>
     </ul>
 
     <div class="wrapper">
@@ -110,18 +110,10 @@
               <button id="btn" class="fas fa-search"></button>
             </div>
 
-            <div id="dd2" class="dropdown">
-                <div id="df2" class="default_option">Value</div>
-                  <ul>
-                  <li>10</li>
-                  <li>25</li>
-                  <li>50</li>
-                  <li>100</li>
-                  <li>250</li>
-                  <li>500</li>
-                  <li>1000</li>
-                </ul>
+            <div class="value_field">
+              <input type="text" name="input_degeri" class="input" placeholder="Value">
             </div>
+            
             <div id="dd3" class="dropdown lastop">
                 <div id="df3" class="default_option">Regression</div> 
                 <ul>
