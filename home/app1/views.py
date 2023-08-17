@@ -20,8 +20,44 @@ def ResultPage(request):
 def LoadingPage(request):
     return render(request, 'loadingPage.html')
 
+
+def getTitle ():
+    import sqlite3
+
+    conn = sqlite3.connect('db.sqlite3')
+    cursor = conn.cursor()
+    cursor.execute("SELECT title FROM app1_search_data GROUP BY title ORDER BY COUNT(title) DESC LIMIT 1;")
+    value = cursor.fetchone()
+    conn.close()
+    return value
+
+
+def getTags ():
+    import sqlite3
+
+    conn = sqlite3.connect('db.sqlite3')
+    cursor = conn.cursor()
+    cursor.execute("SELECT tag,COUNT(tag) FROM app1_search_data GROUP BY tag ORDER BY COUNT(tag) DESC LIMIT 50;")
+    value = cursor.fetchall()
+    print(value)
+    conn.close()
+    return value
+
+def addToDatabase (value, title, tags):
+    import sqlite3
+    from datetime import datetime
+    conn = sqlite3.connect('db.sqlite3')
+    cursor = conn.cursor()
+    add_command = """INSERT INTO app1_search_history (value, title, tags, datetime) VALUES (?, ?, ?, ?);"""
+
+    cursor.execute(add_command, (value, title, tags,datetime.now().replace(microsecond=0)))
+
+    conn.commit()
+    conn.close()
+
 def pwSearch(request):
     try:   
+        # verileri js'ten alıyoruz
         if request.method == 'POST':
             veri_turu = request.POST.get('veri_turu').lower()
             arama_sayisi = int(request.POST.get('arama_sayisi'))
@@ -31,6 +67,7 @@ def pwSearch(request):
         from bs4 import BeautifulSoup
         import sqlite3
 
+        # veri tabanı bağlantısı ve veri tabanı komutları
         conn = sqlite3.connect('db.sqlite3')
         cursor = conn.cursor()
         cursor.execute("DELETE FROM app1_search_data;")
@@ -43,6 +80,7 @@ def pwSearch(request):
             context.grant_permissions(['clipboard-read'])
             web_site = "https://www.shutterstock.com"
             
+            # seçilen veri türüne göre url düzenlemesi 
             if veri_turu == "vector" or veri_turu =="photo" or veri_turu == "illustration":
                 url = web_site + "/tr/search/" + input_degeri + "?image_type=" + veri_turu + "&page="
                 populerlik = True
@@ -107,6 +145,11 @@ def pwSearch(request):
             browser.close()
             conn.commit()
             conn.close()
+
+            title = getTitle()[0] if getTitle() else None
+            tags_list = getTags()
+            tags_str = ', '.join([tag[0] for tag in tags_list])
+            addToDatabase('kalem',title,tags_str)  
         return HttpResponse("pwSearch fonksiyonu çalıştı!")
     except:
         return HttpResponse("pwSearch fonksiyonu hata verdi!")
