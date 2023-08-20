@@ -39,18 +39,17 @@ def getTags ():
     cursor = conn.cursor()
     cursor.execute("SELECT tag,COUNT(tag) FROM app1_search_data GROUP BY tag ORDER BY COUNT(tag) DESC LIMIT 50;")
     value = cursor.fetchall()
-    print(value)
     conn.close()
     return value
 
-def addToDatabase (value, title, tags):
+def addToDatabase (veri_turu, value, title,  tags, arama_sayisi):
     import sqlite3
     from datetime import datetime
     conn = sqlite3.connect('db.sqlite3')
     cursor = conn.cursor()
-    add_command = """INSERT INTO app1_search_history (value, title, tags, datetime) VALUES (?, ?, ?, ?);"""
+    add_command = """INSERT INTO app1_search_history (image_type, value, title, tags, search_amount datetime) VALUES (?, ?, ?, ?, ?, ?);"""
 
-    cursor.execute(add_command, (value, title, tags,datetime.now().replace(microsecond=0)))
+    cursor.execute(add_command, (veri_turu, value, title, tags, arama_sayisi, datetime.now().replace(microsecond=0)))
 
     conn.commit()
     conn.close()
@@ -149,7 +148,7 @@ def pwSearch(request):
             title = getTitle()[0] if getTitle() else None
             tags_list = getTags()
             tags_str = ', '.join([tag[0] for tag in tags_list])
-            addToDatabase('kalem',title,tags_str)  
+            addToDatabase(veri_turu, input_degeri, title, tags_str, arama_sayisi)  
         return HttpResponse("pwSearch fonksiyonu çalıştı!")
     except:
         return HttpResponse("pwSearch fonksiyonu hata verdi!")
