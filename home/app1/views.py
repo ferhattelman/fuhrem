@@ -1,7 +1,5 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-import pandas as pd
-from django.db import connection
 # Create your views here.
 
 def HomePage(request):
@@ -44,7 +42,6 @@ def getTags ():
     conn.close()
     return value
 
-
 def addToDatabase (veri_turu, value, title,  tags, arama_sayisi):
     import sqlite3
     from datetime import datetime
@@ -56,7 +53,6 @@ def addToDatabase (veri_turu, value, title,  tags, arama_sayisi):
 
     conn.commit()
     conn.close()
-
 
 def pwSearch(request):
     try:   
@@ -106,8 +102,8 @@ def pwSearch(request):
             soup = BeautifulSoup(html,"html.parser")
             hrefs = [a['href'] for a in soup.find_all('a', href=True)]
             print(len(hrefs))
-            arama_sayaci = arama_sayisi
-            while(arama_sayaci>0):
+
+            while(arama_sayisi>0):
                 if(i == len(hrefs)-1):
                     i = 0
                     sayfa_sayaci += 1
@@ -125,7 +121,7 @@ def pwSearch(request):
                     if page.is_visible("strong.mui-1isu8w6-empasis"):
                         durum = page.inner_html("strong.mui-1isu8w6-empasis")
                         if durum == "En iyi seçim!":
-                            arama_sayaci -= 1
+                            arama_sayisi -= 1
                             page.get_by_role("button", name="Anahtar sözcükleri panoya kopyalayın").click()
                             titles = page.inner_html(".mui-u28gw5-titleRow > h1").split(".")
                             filtered_titles = [title.strip() for title in titles if title.strip()]
@@ -135,7 +131,7 @@ def pwSearch(request):
                             for tag in tags[len(filtered_titles):]:
                                 cursor.execute(add_command, (tag.strip(), None))
                 else:
-                    arama_sayaci -= 1
+                    arama_sayisi -= 1
                     page.get_by_role("button", name="Anahtar sözcükleri panoya kopyalayın").click()
                     titles = page.inner_html(".mui-u28gw5-titleRow > h1").split(".")
                     filtered_titles = [title.strip() for title in titles if title.strip()]

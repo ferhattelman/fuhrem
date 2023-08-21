@@ -14,11 +14,4 @@ class Search_history(models.Model):
     datetime = models.DateTimeField()
 
     def __str__ (self):
-         return f"""
-            Sorgu Zamanı = {self.datetime} || 
-            Görsel Türü = {self.image_type} || 
-            Aranan Kelime = {self.value} || 
-            Başlık = {self.title} || 
-            Arama Sayısı = {self.search_amount} || 
-            Etiketler = {self.tags} || 
-           """
+        return f"{self.image_type} {self.value} {self.title} {self.tags} {self.search_amount} {self.datetime}"
