@@ -47,7 +47,7 @@ def addToDatabase (veri_turu, value, title,  tags, arama_sayisi):
     from datetime import datetime
     conn = sqlite3.connect('db.sqlite3')
     cursor = conn.cursor()
-    add_command = """INSERT INTO app1_search_history (image_type, value, title, tags, search_amount datetime) VALUES (?, ?, ?, ?, ?, ?);"""
+    add_command = """INSERT INTO app1_search_history (image_type, value, title, tags, search_amount, datetime) VALUES (?, ?, ?, ?, ?, ?);"""
 
     cursor.execute(add_command, (veri_turu, value, title, tags, arama_sayisi, datetime.now().replace(microsecond=0)))
 
