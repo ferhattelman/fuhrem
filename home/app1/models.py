@@ -14,7 +14,7 @@ class Search_history(models.Model):
     datetime = models.DateTimeField()
 
     def __str__ (self):
-        return f"""
+         return f"""
             Sorgu Zamanı = {self.datetime} || 
             Görsel Türü = {self.image_type} || 
             Aranan Kelime = {self.value} || 
