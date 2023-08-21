@@ -12,3 +12,6 @@ class Search_history(models.Model):
     tags = models.TextField()
     search_amount = models.IntegerField(default=12)
     datetime = models.DateTimeField()
+
+    def __str__ (self):
+        return f"{self.image_type} {self.value} {self.title} {self.tags} {self.search_amount} {self.datetime}"
