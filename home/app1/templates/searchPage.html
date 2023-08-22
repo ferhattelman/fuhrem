@@ -2,6 +2,8 @@
 <html>
 <head>
     {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <link rel="stylesheet" href="{% static 'css/header.css' %}">
     <link rel="stylesheet" href="{% static 'css/search.css' %}">
@@ -9,13 +11,72 @@
     <link href="https://fonts.cdnfonts.com/css/blanka" rel="stylesheet">
     <script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
 	  <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    <style>
+      .content {
+        position: relative;
+        display: grid;
+        place-items: center;
+        height: 60vh;
+        display: none; /* Hide the content initially */
+      }
+  
+      .content .text {
+        color: #fff;
+        font-size: 3rem;
+        position: absolute;
+        left: 50%; /* Center horizontally */
+        top: 50%; /* Center vertically */
+        transform: translate(-50%, -50%);
+      }
+  
+      .content .text:nth-child(1) {
+        color: transparent;
+        -webkit-text-stroke: 2px #8338ec;
+      }
+  
+      .content .text:nth-child(2) {
+        color: #c19bf5;
+        animation: animate 4s ease-in-out infinite;
+      }
+  
+      @keyframes animate {
+        0%, 100% {
+          clip-path: polygon(
+            0% 45%,
+            16% 44%,
+            33% 50%,
+            54% 60%,
+            70% 61%,
+            84% 59%,
+            100% 52%,
+            100% 100%,
+            0% 100%
+          );
+        }
+  
+        50% {
+          clip-path: polygon(
+            0% 60%,
+            15% 65%,
+            34% 66%,
+            51% 62%,
+            67% 50%,
+            84% 45%,
+            100% 46%,
+            100% 100%,
+            0% 100%
+          );
+        }
+      }
+    </style>
 	<script>
     let veri_turu;
     let arama_sayisi;
     let graphic;
-    $(document).ready(function(){
-      $("#btn").click(function(){
-        console.log(veri_turu+' '+arama_sayisi+' '+graphic);
+    $(document).ready(function() {
+      $("#btn").click(function() {
+        const content = $("#content");
+        content.toggle(); // Toggle the visibility of content
       });
     });
 		$(document).ready(function(){
@@ -85,7 +146,10 @@
         <a style="text-decoration:none;" href="{% url 'about' %}"> <li ><p class="menu-link" >About</p></li></a>
         <a style="text-decoration:none;" href="{% url 'contact' %}"> <li ><p class="menu-link" >Contact</p></li></a>
     </ul>
-
+    <div class="content" id="content">
+      <div class="text">LOADING...</div>
+      <div class="text">LOADING...</div>
+    </div>
     <div class="wrapper">
       <form method="post" action="{% url 'pwSearch' %}" class="search_field">
         {% csrf_token %}
@@ -107,11 +171,10 @@
               <input type="text" name="input_degeri" class="input" placeholder="Search">
               <button id="btn" class="fas fa-search"></button>
             </div>
-
+            
             <div class="value_field">
               <input type="text" name="arama_sayisi" id="arama_sayisi" class="input" placeholder="Value">
             </div>
-
             <div id="dd3" class="dropdown lastop">
                 <div id="df3" class="default_option">Regression</div> 
                 <ul>

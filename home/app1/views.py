@@ -78,7 +78,7 @@ def pwSearch(request):
         add_command = """INSERT INTO app1_search_data (tag, title) VALUES (?, ?);"""
 
         with sync_playwright() as p:
-            browser = p.chromium.launch(headless=False)
+            browser = p.chromium.launch()
             context = browser.new_context()
             context.grant_permissions(['clipboard-read'])
             web_site = "https://www.shutterstock.com"
