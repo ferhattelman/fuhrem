@@ -1,7 +1,17 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+import openpyxl
 import pandas as pd
 from django.db import connection
+import sqlite3
+from datetime import datetime
+from playwright.sync_api import sync_playwright
+from bs4 import BeautifulSoup
+import os
+import matplotlib.pyplot as plt
+import matplotlib
+import seaborn as sns
+matplotlib.use('Agg')
 # Create your views here.
 
 def HomePage(request):
@@ -24,8 +34,6 @@ def LoadingPage(request):
 
 
 def getTitle ():
-    import sqlite3
-
     conn = sqlite3.connect('db.sqlite3')
     cursor = conn.cursor()
     cursor.execute("SELECT title FROM app1_search_data GROUP BY title ORDER BY COUNT(title) DESC LIMIT 1;")
@@ -33,10 +41,7 @@ def getTitle ():
     conn.close()
     return value
 
-
 def getTags ():
-    import sqlite3
-
     conn = sqlite3.connect('db.sqlite3')
     cursor = conn.cursor()
     cursor.execute("SELECT tag,COUNT(tag) FROM app1_search_data GROUP BY tag ORDER BY COUNT(tag) DESC LIMIT 50;")
@@ -44,10 +49,7 @@ def getTags ():
     conn.close()
     return value
 
-
 def addToDatabase (veri_turu, value, title,  tags, arama_sayisi):
-    import sqlite3
-    from datetime import datetime
     conn = sqlite3.connect('db.sqlite3')
     cursor = conn.cursor()
     add_command = """INSERT INTO app1_search_history (image_type, value, title, tags, search_amount, datetime) VALUES (?, ?, ?, ?, ?, ?);"""
@@ -57,6 +59,36 @@ def addToDatabase (veri_turu, value, title,  tags, arama_sayisi):
     conn.commit()
     conn.close()
 
+def grafikEkrana():
+    print(3)
+    #SQLite veritabanına bağlan
+    conn = sqlite3.connect('db.sqlite3')
+    cursor = conn.cursor()
+
+    #Veriyi çek
+    cursor.execute("SELECT tag, COUNT(tag) AS tekrar_sayisi FROM app1_search_data GROUP BY tag ORDER BY tekrar_sayisi DESC LIMIT 50")
+    data = cursor.fetchall()
+
+    #Veriyi pandas DataFrame'e dönüştür
+    df = pd.DataFrame(data, columns=['Tag', 'Tekrar Sayısı'])
+
+    #Veriyi tekrar sayısına göre azdan çoğa doğru sırala
+    df_sorted = df.sort_values(by='Tekrar Sayısı')
+
+    #Seaborn ile çubuk grafiği çiz
+    plt.figure(figsize=(12, 8))
+    sns.set(style='whitegrid')  # Arka plan stili
+    barplot = sns.barplot(data=df_sorted, x='Tekrar Sayısı', y='Tag', palette='viridis')  # Renk paleti 'viridis'
+    plt.xlabel('Tekrar Sayısı', fontsize=14)
+    plt.ylabel('Tag', fontsize=14)
+    plt.title('En Sık Geçen 50 Tag', fontsize=16)
+    plt.xticks(rotation=0)
+    plt.yticks(fontsize=10)
+    plt.tight_layout()
+    file_path = 'app1/static/images/grafik.png'
+    if os.path.exists(file_path):
+        os.remove(file_path)
+    plt.savefig(file_path)
 
 def pwSearch(request):
     try:   
@@ -66,10 +98,6 @@ def pwSearch(request):
             arama_sayisi = int(request.POST.get('arama_sayisi'))
             input_degeri = request.POST.get('input_degeri').lower()
         
-        from playwright.sync_api import sync_playwright
-        from bs4 import BeautifulSoup
-        import sqlite3
-
         # veri tabanı bağlantısı ve veri tabanı komutları
         conn = sqlite3.connect('db.sqlite3')
         cursor = conn.cursor()
@@ -78,7 +106,7 @@ def pwSearch(request):
         add_command = """INSERT INTO app1_search_data (tag, title) VALUES (?, ?);"""
 
         with sync_playwright() as p:
-            browser = p.chromium.launch()
+            browser = p.chromium.launch(headless=False)
             context = browser.new_context()
             context.grant_permissions(['clipboard-read'])
             web_site = "https://www.shutterstock.com"
@@ -152,7 +180,45 @@ def pwSearch(request):
             title = getTitle()[0] if getTitle() else None
             tags_list = getTags()
             tags_str = ', '.join([tag[0] for tag in tags_list])
-            addToDatabase(veri_turu, input_degeri, title, tags_str, arama_sayisi)  
-        return HttpResponse("pwSearch fonksiyonu çalıştı!")
+            print(1)
+            addToDatabase(veri_turu, input_degeri, title, tags_str, arama_sayisi)
+            print(2)
+            grafikEkrana()
+        return render(request, 'resultPage.html')
     except:
         return HttpResponse("pwSearch fonksiyonu hata verdi!")
+
+def indirview(request):
+    # Yeni dosya adı oluşturma
+    timestamp = datetime.datetime.now().strftime("%Y%m%d%H.%M.%S")
+    xlsx_filename = f"veriler_{timestamp}.xlsx"
+
+    # SQLite veritabanına bağlan
+    conn = sqlite3.connect('db.sqlite3')
+    cursor = conn.cursor()
+
+    # Verileri çek
+    cursor.execute("SELECT tag, COUNT(tag) AS tekrar_sayisi FROM app1_search_data GROUP BY tag ORDER BY tekrar_sayisi DESC LIMIT 50")
+    rows = cursor.fetchall()
+
+    # Workbook oluştur
+    workbook = openpyxl.Workbook()
+    sheet = workbook.active
+
+    # Başlıkları yaz
+    sheet.append(["Başliklar", "Tekrar Sayilari"])
+
+    # Verileri yaz
+    for tagler, tekrar_sayisi in rows:
+        sheet.append([tagler, tekrar_sayisi])
+
+    # Dosyayı kaydet
+    workbook.save(xlsx_filename)
+
+    # Bağlantıyı kapat
+    conn.close()
+
+    response = HttpResponse(open(xlsx_filename, 'rb').read(), content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
+    response['Content-Disposition'] = f'attachment; filename={xlsx_filename}'
+
+    return response
