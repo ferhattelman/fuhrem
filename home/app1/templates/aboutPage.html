@@ -13,9 +13,9 @@
     {% load static %}
     <h1 class="h1">FUHREM</h1>
     <ul class="menu-bar">
-        <li><a class="menu-link" href="{% url 'search' %}">Home</a></li>
-        <li><a class="menu-link" href="{% url 'about' %}">About</a></li>
-        <li><a class="menu-link" href="{% url 'contact' %}">Contact</a></li>
+        <a style="text-decoration:none;" href="{% url 'search' %}"> <li ><p class="menu-link" >Home</p></li></a>
+        <a style="text-decoration:none;" href="{% url 'about' %}"> <li ><p class="menu-link" >About</p></li></a>
+        <a style="text-decoration:none;" href="{% url 'contact' %}"> <li ><p class="menu-link" >Contact</p></li></a>
     </ul>
 
     <section class="about">
