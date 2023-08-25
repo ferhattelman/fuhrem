@@ -116,27 +116,6 @@
       });
     });
 
-
-
-    $(document).ready(function() {
-      $("#df3").click(function(){
-			  $("#dd3 ul").addClass("active");
-			});
-
-			$("#dd3 ul li").click(function(){
-			  var text = $(this).text();
-			  $("#df3").text(text);
-			  $("#dd3 ul").removeClass("active");
-        graphic = text;
-        
-			});
-      $(document).on("click", function(event) {
-        if (!$(event.target).closest(".dropdown").length) {
-          $(".dropdown ul").removeClass("active");
-        }
-      });
-    });
-
 	</script>
 <body>
     {% load static %}
@@ -150,11 +129,12 @@
       <div class="text">LOADING...</div>
       <div class="text">LOADING...</div>
     </div>
+   
     <div class="wrapper">
       <form method="post" action="{% url 'pwSearch' %}" class="search_field">
         {% csrf_token %}
         <div class="search_box">
-            <div id="dd1" class="dropdown">
+            <div id="dd1" class="dropdown">   
                 <div id="df1" class="default_option">Category</div>  
                 <ul>
                   <li>Photo</li>
@@ -165,6 +145,9 @@
                   <li>Editorial Video</li>
                 </ul>
             </div>
+            <div class="value_field">
+              <input type="text" name="arama_sayisi" id="arama_sayisi" class="input" placeholder="Search Amount">
+            </div>
 
             <div class="search_field">
               <input type="hidden" name="veri_turu" id="veri_turu">
@@ -172,16 +155,7 @@
               <button id="btn" class="fas fa-search"></button>
             </div>
             
-            <div class="value_field">
-              <input type="text" name="arama_sayisi" id="arama_sayisi" class="input" placeholder="Value">
-            </div>
-            <div id="dd3" class="dropdown lastop">
-                <div id="df3" class="default_option">Regression</div> 
-                <ul>
-                  <li>Linner</li>
-                  <li>Logistics</li>
-                </ul>
-            </div>
+
         </div>
       </form>
     </div>

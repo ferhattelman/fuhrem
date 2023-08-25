@@ -1,14 +1,17 @@
 <!DOCTYPE html>
 <html>
 <head>
-  {% load static %}
-    <title>Grafik Örneği</title>
+    {% load static %}
+    <title>Fuhrem Result Page</title>
+    <link rel="stylesheet" href="../static/css/resultpage.css">
 </head>
 <body>
-  {% load static %}
-    <h1>Grafik Örneği</h1>
-    <img src="{% static 'images/grafik.png' %}" alt="Oluşturulan Grafik">
-    <button type="submit">Verileri İndir</button>
-
+    {% load static %}
+    <div class="main-container">
+        <h1>Graphic Template</h1>
+        <img src="{% static 'images/grafik.png' %}" alt="Oluşturulan Grafik">
+        <h3>En uygun başlık: Lorem ipsum dolor sit amet consectetur adipisicing elit</h3>
+        <button type="submit">Download Excel Document</button>
+    </div>
 </body>
 </html>

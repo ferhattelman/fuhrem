@@ -60,7 +60,6 @@ def addToDatabase (veri_turu, value, title,  tags, arama_sayisi):
     conn.close()
 
 def grafikEkrana():
-    print(3)
     #SQLite veritabanına bağlan
     conn = sqlite3.connect('db.sqlite3')
     cursor = conn.cursor()
@@ -72,12 +71,10 @@ def grafikEkrana():
     #Veriyi pandas DataFrame'e dönüştür
     df = pd.DataFrame(data, columns=['Tag', 'Tekrar Sayısı'])
 
-    #Veriyi tekrar sayısına göre azdan çoğa doğru sırala
-    df_sorted = df.sort_values(by='Tekrar Sayısı')
+    #Veriyi tekrar sayısına göre çoktan aza doğru sırala
+    df_sorted = df.sort_values(by='Tekrar Sayısı', ascending=False)  # ascending=False ile büyükten küçüğe sırala
 
-    #Seaborn ile çubuk grafiği çiz
-    plt.figure(figsize=(12, 8))
-    sns.set(style='whitegrid')  # Arka plan stili
+
     barplot = sns.barplot(data=df_sorted, x='Tekrar Sayısı', y='Tag', palette='viridis')  # Renk paleti 'viridis'
     plt.xlabel('Tekrar Sayısı', fontsize=14)
     plt.ylabel('Tag', fontsize=14)
@@ -180,9 +177,7 @@ def pwSearch(request):
             title = getTitle()[0] if getTitle() else None
             tags_list = getTags()
             tags_str = ', '.join([tag[0] for tag in tags_list])
-            print(1)
             addToDatabase(veri_turu, input_degeri, title, tags_str, arama_sayisi)
-            print(2)
             grafikEkrana()
         return render(request, 'resultPage.html')
     except:
