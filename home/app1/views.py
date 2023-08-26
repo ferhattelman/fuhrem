@@ -108,18 +108,16 @@ def pwSearch(request):
             context.grant_permissions(['clipboard-read'])
             web_site = "https://www.shutterstock.com"
             
+            populerlik = False
             # seçilen veri türüne göre url düzenlemesi 
             if veri_turu == "vector" or veri_turu =="photo" or veri_turu == "illustration":
                 url = web_site + "/tr/search/" + input_degeri + "?image_type=" + veri_turu + "&page="
                 populerlik = True
             elif veri_turu == "editorial image":
                 url = web_site + "/tr/editorial/search/" + input_degeri
-                populerlik = False
             elif veri_turu == "editorial video":
-                populerlik = False
                 url = web_site + "/tr/editorial/video/search/" + input_degeri
             elif veri_turu == "video":
-                populerlik = False
                 url = web_site + "/tr/video/search/" + input_degeri + "?page="
 
             page = context.new_page()
@@ -142,7 +140,6 @@ def pwSearch(request):
                     html = page.inner_html("div.mui-1nl4cpc-gridContainer-root")
                     soup = BeautifulSoup(html,"html.parser")
                     hrefs = [a['href'] for a in soup.find_all('a', href=True)]
-                    print(len(hrefs))
 
                 page.goto(web_site+hrefs[i])
                 page.mouse.wheel(0, 1000)
